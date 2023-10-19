@@ -39,7 +39,6 @@ const productImgResize = async (req, res, next) => {
     })
   );
   next();
-  // console.log('successfully uploaded');
 };
 
 

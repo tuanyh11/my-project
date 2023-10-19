@@ -20,7 +20,6 @@ const createUser = asyncHandler(async (req, res) => {
   /**
    * TODO:Get the email from req.body
    */
-  log(req.body)
   const email = req.body.email;
   /**
    * TODO:With the help of email find the user exists or not
