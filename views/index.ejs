@@ -10,11 +10,11 @@
 
 <body>
     <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-            <div
+        <div class="relative py-3 sm:max-w-4xl w-full sm:mx-auto">
+            <!-- <div
                 class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
-            </div>
-            <form action="" method="get" class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+            </div> -->
+            <form action="/phone" method="post" class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
                 <div class="max-w-md mx-auto">
                     <div>
                         <h1 class="text-2xl font-semibold">URL</h1>
@@ -22,10 +22,10 @@
                     <div class="divide-y divide-gray-200">
                         <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                             <div class="relative">
-                                <input autocomplete="off" id="email" name="email" type="text"
+                                <input autocomplete="off" id="url" name="url" type="text"
                                     class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                                     placeholder="Email address" />
-                                <label for="email"
+                                <label for="url"
                                     class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">URL</label>
                             </div>
 
@@ -36,6 +36,34 @@
                     </div>
                 </div>
             </form>
+
+           <div class="mt-5">
+            <% if (product) { %>
+                <div class="text-2xl mt-50"><%= product.title %></div>
+                <div class="text-2xl mt-5"><%= product.description %></div>
+                <div class="text-2xl mt-5"><%= product.price %></div>
+                <div class="text-2xl mt-5"><% product.finalShortDes.forEach(element => { %>
+                    <div class="text-2xl mt-2"><%= element.key %> <br> <%= element.value  %></div>
+                <% }) %></div>
+            <% } %>
+           </div>
+
+            <form action="/remove-images" method="get" class="mt-10">
+                <div class="relative">
+                    <button class="bg-blue-500 text-white rounded-md px-2 py-1">Del</button>
+                </div>
+            </form>
+
+            <% if (message) { %>
+                <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md" role="alert">
+                    <div class="flex">
+                      <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                      <div>
+                        <p class="font-bold"><%= message %></p>
+                      </div>
+                    </div>
+                  </div>
+            <% } %>
         </div>
     </div>
 </body>
