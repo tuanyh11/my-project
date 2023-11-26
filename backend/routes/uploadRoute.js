@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.post(
   "/",
-  authMiddleware,
-  isAdmin,
+  // authMiddleware,
+  // isAdmin,
   uploadPhoto.array("images", 10),
   productImgResize,
   uploadImages
