@@ -12,24 +12,28 @@ export const CheckoutSideMenu = () => {
 
     const context = useContext(Context);
     const date = useCreateDate();
-    // const email = localStorage.getItem('email');
+
+    const totalPriceProductToCart = ()=>{
+        const productJSON = localStorage.getItem('comprarShopi');
+
+        const products = JSON.parse(productJSON);
+    
+        let total = 0;
+    
+        products.forEach(product => {
+            const price = parseFloat(product.price);
+            const quantity = parseFloat(product.quantity);
+            
+            total += price * quantity;
+
+        });
+        return total
+    }
 
     const handleDelete = async(id) => {
-        console.log("DELETE" + id);
         const filteredProducts = context.cartProducts.filter(prod => prod.id != id);
         context.setCartProducts(filteredProducts);
-        // try {
-        //     const response = await deleteProductInCart(email, id);
-        //     if (response) {
-        //         console.log('Delete successful');
-        //     } else {
-        //         setError(response.data.error);
-        //     }
-        // } catch (error) {
-        //     console.error('An error occurred:', error);
-        // }
     }
-    
 
     const handleCheckout = () => {
         const orderToAdd = {
@@ -59,7 +63,7 @@ export const CheckoutSideMenu = () => {
             <div className='px-4 mb-4'>
                 <p className='flex flex-row justify-between items-center'>
                     <span>Total in the shopping cart:</span>
-                    <span className='font-medium text-2xl text-red-800'>${totalPrice(context.cartProducts)}</span>
+                    <span className='font-medium text-2xl text-red-800'>${totalPriceProductToCart()}</span>
                 </p>
                 {
                     context.productsCount !== 0 &&

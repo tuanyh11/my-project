@@ -5,14 +5,27 @@ import { Context } from '../context';
 import { Link } from 'react-router-dom';
 import { totalPrice } from '../utils';
 import { useCreateDate } from '../hooks';
+import { deleteProductInCart } from '../apis';
 
 export const CartShoppingPage = () => {
 
     const context = useContext(Context);
     const date = useCreateDate();
     GoToTop();
+    const email = localStorage.getItem('email');
 
-    const handleDelete = (id) => {
+    const handleDelete = async(id) => {
+        console.log(id)
+        try {
+            const response = await deleteProductInCart(email, id);
+            if (response) {
+                console.log('Delete successful');
+            } else {
+                setError(response.data.error);
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+        }
         const filteredProducts = context.cartProducts.filter(prod => prod.id != id);
         context.setCartProducts(filteredProducts);
     }
@@ -30,6 +43,23 @@ export const CartShoppingPage = () => {
         context.setCartProducts([]);
         context.closeCheckoutSideMenu();
         //context.setSearchByTitle(null);
+    }
+
+    const totalPriceProductToCart = ()=>{
+        const productJSON = localStorage.getItem('comprarShopi');
+
+        const products = JSON.parse(productJSON);
+    
+        let total = 0;
+    
+        products.forEach(product => {
+            const price = parseFloat(product.price);
+            const quantity = parseFloat(product.quantity);
+            
+            total += price * quantity;
+
+        });
+        return total
     }
 
     return (
@@ -55,7 +85,7 @@ export const CartShoppingPage = () => {
                     <p className='flex flex-row justify-between items-center'>
                         <span className='mr-5'>Total in the shopping cart:</span>
                         
-                        <span className='font-medium text-2xl text-red-800'>${totalPrice(context.cartProducts)}</span>
+                        <span className='font-medium text-2xl text-red-800'>${totalPriceProductToCart()}</span>
                     </p>
                     {
                         context.productsCount !== 0 &&
