@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { totalPrice } from '../utils';
 import { useCreateDate } from '../hooks';
 import { deleteProductInCart } from '../apis';
+import useStore from '../store';
+import { products } from '../assets/products';
 
 export const CartShoppingPage = () => {
 
@@ -13,9 +15,10 @@ export const CartShoppingPage = () => {
     const date = useCreateDate();
     GoToTop();
     const email = localStorage.getItem('email');
-
+    
+    const {cart} = useStore()
+    
     const handleDelete = async(id) => {
-        console.log(id)
         try {
             const response = await deleteProductInCart(email, id);
             if (response) {
@@ -52,7 +55,7 @@ export const CartShoppingPage = () => {
     
         let total = 0;
     
-        products.forEach(product => {
+        products?.forEach(product => {
             const price = parseFloat(product.price);
             const quantity = parseFloat(product.quantity);
             
@@ -62,6 +65,7 @@ export const CartShoppingPage = () => {
         return total
     }
 
+
     return (
         <Layout>
             <h1 className='mb-5 font-bold text-4xl'>My shopping cart</h1>
@@ -69,16 +73,19 @@ export const CartShoppingPage = () => {
             <div className='flex flex-grow justify-between items-start max-w-screen-lg'>
                 <div className='overflow-y-scroll px-20'>
                     {
-                        context.cartProducts.map((prod) => (
-                            <OrderCard
-                                key={prod.id}
-                                id={prod.id}
-                                title={prod.title}
-                                imageUrl={prod.images[0]}
-                                price={prod.price}
-                                handleDelete={handleDelete}
-                            />
-                        ))
+                        cart.map((prod) => {
+                            const productImage = products[Math.floor(Math.random() * products.length)].images;
+                            return (
+                                <OrderCard
+                                    key={prod.id}
+                                    id={prod.id}
+                                    title={prod.name}
+                                    imageUrl={productImage[Math.floor(Math.random() * productImage.length)]}
+                                    price={prod.price}
+                                    handleDelete={handleDelete}
+                                />
+                            )
+                        })
                     }
                 </div>
                 <div className='px-4 mb-4'>

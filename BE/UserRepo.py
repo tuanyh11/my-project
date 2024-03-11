@@ -1,4 +1,6 @@
 import xml.etree.ElementTree as ET
+import xml.dom.minidom as Minidom
+import xml;
 import uuid;
 import hashlib
 
@@ -20,18 +22,23 @@ class UserRepo():
         return values
     
     def login(self, email: str, password: str):
-
+        data = {}
+        def element_to_dict(element):
+            result = {}
+            for child in element:
+                if child.tag == 'cart':
+                    result[child.tag] = [element_to_dict(product) for product in child.findall('product')]
+                elif child:
+                    result[child.tag] = element_to_dict(child)
+                else:
+                    result[child.tag] = child.text
+            return result
         for user in self.treeElement.iterfind("user"):
             user_email = user.find("email").text
             password_db = user.find("password").text
-
-            if user_email == email:
-                if password_db == password:
-                    return True  
-                else:
-                    return False  
-        return False
- 
+            if user_email == email and password_db == password:
+                return element_to_dict(user)
+        return data 
     
     def getUsers(self):
         users = []

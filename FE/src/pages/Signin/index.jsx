@@ -2,12 +2,21 @@ import { useState } from 'react';
 import { Layout } from '../../components';
 import { login } from '../../apis';
 import { Link  } from 'react-router-dom';
+import {useMutation} from "@tanstack/react-query"
+import { toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
+import useStore from '../../store';
+
 
 export const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
+
+    const {updateStore} = useStore()
+
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -17,19 +26,25 @@ export const Signin = () => {
         setPassword(e.target.value);
     };
 
+
+    const {mutate} = useMutation({
+        mutationFn: login,
+        mutationKey: ["login"],
+        onSuccess: (userInfo) => {
+            const {message, data} = userInfo.data
+            updateStore(data)
+            toast.success(message)
+            navigate("/")
+        },
+        onError: (data) => {
+            toast.error(data?.response?.data?.message)
+        }
+    })
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await login(email, password);
-            if (response.status === 200) {
-                console.log('Login successful');
-                localStorage.setItem('password', password);
-                localStorage.setItem('email', email);
-                setIsLoggedIn(true);
-                
-            } else {
-                setError(response.data.error);
-            }
+            mutate({email, password})
         } catch (error) {
             console.error('An error occurred:', error);
         }

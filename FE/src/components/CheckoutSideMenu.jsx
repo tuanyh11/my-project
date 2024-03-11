@@ -20,7 +20,7 @@ export const CheckoutSideMenu = () => {
     
         let total = 0;
     
-        products.forEach(product => {
+        products?.forEach(product => {
             const price = parseFloat(product.price);
             const quantity = parseFloat(product.quantity);
             

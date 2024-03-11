@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useContext,  useState} from 'react';
 import { Context } from '../context';
 import { ShoppingCartIcon } from '@heroicons/react/24/solid';
+import useStore from '../store';
 
 const activeStyle = "underline underline-offset-4";
 
@@ -10,6 +11,8 @@ export const NavBar = () => {
     const context = useContext(Context);
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const email = localStorage.getItem('email');
+
+    const {cart} = useStore()
 
     const handleLogout = () => {
         localStorage.removeItem('email');
@@ -109,10 +112,10 @@ export const NavBar = () => {
                         <ShoppingCartIcon className='h-5 w-5 text-black'></ShoppingCartIcon>
                     </NavLink>
                     {
-                        context.productsCount === 0 ?
-                            <div className='flex justify-center items-center text-xs font-semibold'>{context.productsCount}</div>
+                        cart.length === 0 ?
+                            <div className='flex justify-center items-center text-xs font-semibold'>{cart.length}</div>
                             :
-                            <div className='flex justify-center items-center bg-green-100 w-5 h-5 rounded-full text-xs font-semibold'>{context.productsCount}</div>
+                            <div className='flex justify-center items-center bg-green-100 w-5 h-5 rounded-full text-xs font-semibold'>{cart.length}</div>
                     }
                 </li>
                 {isLoggedIn && (  

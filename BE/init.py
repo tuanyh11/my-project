@@ -8,7 +8,7 @@ from ProductRepo import ProductRepo
 
 
 # FILE_PATH = "/data/shop.xml"
-FILE_PATH = "data/shop.xml"
+FILE_PATH = "../data/shop.xml"
 tree = ET.parse(FILE_PATH)
 
 root = tree.getroot()
@@ -71,10 +71,11 @@ def login():
 
     authenticated = userRepo.login(email, password)
 
-    if authenticated:
-        return jsonify({'message': 'Login successful'}), 200
+    print(authenticated)
+    if len(authenticated) != 0:
+        return jsonify({'message': 'Login successful', "data": authenticated}), 200
     else:
-        return jsonify({'error': 'Invalid email or password'}), 401
+        return jsonify({'message': 'Invalid email or password'}), 401
 
 
 

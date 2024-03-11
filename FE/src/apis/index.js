@@ -1,7 +1,8 @@
 import API from "../config/axios";
 
-export const login = (email, password) => {
-  return API.post(`/login`, { email, password });
+export const login = (data) => {
+  console.log(data);
+  return API.post(`/login`, data);
 };
 
 export const getProducts = () => {
