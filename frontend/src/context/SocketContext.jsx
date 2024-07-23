@@ -12,10 +12,9 @@ export const SocketContextProvider = ({ children }) => {
 	const [socket, setSocket] = useState(null);
 	const [onlineUsers, setOnlineUsers] = useState([]);
 	const { authUser } = useAuthContext();
-
 	useEffect(() => {
 		if (authUser) {
-			const socket = io("https://chat-app-yt.onrender.com", {
+			const socket = io("https://my-project-0xpv.onrender.com/", {
 				query: {
 					userId: authUser._id,
 				},
