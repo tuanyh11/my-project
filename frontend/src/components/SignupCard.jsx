@@ -13,6 +13,7 @@ import {
 	Text,
 	useColorModeValue,
 	Link,
+	Select,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -25,10 +26,11 @@ export default function SignupCard() {
 	const [showPassword, setShowPassword] = useState(false);
 	const setAuthScreen = useSetRecoilState(authScreenAtom);
 	const [inputs, setInputs] = useState({
-		name: "",
+		fullName: "",
 		username: "",
 		email: "",
 		password: "",
+		gender: ""
 	});
 
 	const showToast = useShowToast();
@@ -73,7 +75,7 @@ export default function SignupCard() {
 									<FormLabel>Full name</FormLabel>
 									<Input
 										type='text'
-										onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
+										onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
 										value={inputs.name}
 									/>
 								</FormControl>
@@ -114,6 +116,12 @@ export default function SignupCard() {
 									</Button>
 								</InputRightElement>
 							</InputGroup>
+						</FormControl>
+						<FormControl isRequired>
+							<Select  onChange={(e) => setInputs({...inputs, gender: e.target.value})}  placeholder='Genders'>
+								<option defaultChecked value='male'>Male</option>
+								<option value='female'>Female</option>
+							</Select>
 						</FormControl>
 						<Stack spacing={10} pt={2}>
 							<Button

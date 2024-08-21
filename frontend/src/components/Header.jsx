@@ -23,19 +23,19 @@ const Header = () => {
 					<AiFillHome size={24} />
 				</Link>
 			)}
-			{!user && (
+			{/* {!user && (
 				<Link as={RouterLink} to={"/auth"} onClick={() => setAuthScreen("login")}>
 					Login
 				</Link>
-			)}
+			)} */}
 
-			<Image
+			{/* <Image
 				cursor={"pointer"}
 				alt='logo'
 				w={6}
-				src={colorMode === "dark" ? "/light-logo.svg" : "/dark-logo.svg"}
+				src={colorMode === "dark" ? "/logo.svg" : "/logo.svg"}
 				onClick={toggleColorMode}
-			/>
+			/> */}
 
 			{user && (
 				<Flex alignItems={"center"} gap={4}>
@@ -54,11 +54,11 @@ const Header = () => {
 				</Flex>
 			)}
 
-			{!user && (
+			{/* {!user && (
 				<Link as={RouterLink} to={"/auth"} onClick={() => setAuthScreen("signup")}>
 					Sign up
 				</Link>
-			)}
+			)} */}
 		</Flex>
 	);
 };

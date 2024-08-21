@@ -22,7 +22,6 @@ const Conversation = ({ conversation, isOnline }) => {
 	const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationAtom);
 	const colorMode = useColorMode();
 
-	console.log("selectedConverstion", selectedConversation);
 	return (
 		<Flex
 			gap={4}
@@ -72,7 +71,7 @@ const Conversation = ({ conversation, isOnline }) => {
 					) : (
 						""
 					)}
-					{lastMessage.text.length > 18
+					{lastMessage.text?.length > 18
 						? lastMessage.text.substring(0, 18) + "..."
 						: lastMessage.text || <BsFillImageFill size={16} />}
 				</Text>
