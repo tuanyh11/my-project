@@ -1,4 +1,4 @@
-import { Button, Flex, Image, Link, useColorMode } from "@chakra-ui/react";
+import { Button, Flex, Image, Link, position, useColorMode } from "@chakra-ui/react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import userAtom from "../atoms/userAtom";
 import { AiFillHome } from "react-icons/ai";
@@ -8,14 +8,14 @@ import { FiLogOut } from "react-icons/fi";
 import useLogout from "../hooks/useLogout";
 import authScreenAtom from "../atoms/authAtom";
 import { BsFillChatQuoteFill } from "react-icons/bs";
-import { MdOutlineSettings } from "react-icons/md";
+import { MdOutlineSettings, MdOutlineLightMode } from "react-icons/md";
 
 const Header = () => {
 	const { colorMode, toggleColorMode } = useColorMode();
 	const user = useRecoilValue(userAtom);
 	const logout = useLogout();
 	const setAuthScreen = useSetRecoilState(authScreenAtom);
-
+	const bgCl = `${colorMode === "dark" ? "#03A9F4": "#03A9F4"}`;
 	return (
 		<Flex justifyContent={"space-between"} mt={6} mb='12'>
 			{user && (
@@ -36,6 +36,10 @@ const Header = () => {
 				src={colorMode === "dark" ? "/logo.svg" : "/logo.svg"}
 				onClick={toggleColorMode}
 			/> */}
+			
+			<div onClick={toggleColorMode} className="mode" style={{"--bg-cl": bgCl, "--txt-cl": "white"}} >
+				<MdOutlineLightMode/>
+			</div>
 
 			{user && (
 				<Flex alignItems={"center"} gap={4}>
