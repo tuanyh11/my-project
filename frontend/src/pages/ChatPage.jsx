@@ -34,7 +34,6 @@ const ChatPage = () => {
   const currentUser = useRecoilValue(userAtom);
   const showToast = useShowToast();
   const { socket, onlineUsers } = useSocket();
-  
 
   useEffect(() => {
     socket?.on("messagesSeen", ({ conversationId }) => {
@@ -78,7 +77,7 @@ const ChatPage = () => {
   }, [showToast, setConversations]);
 
   const handleConversationSearch = async (searchText) => {
-	if(!searchText) return
+    if (!searchText) return;
     setSearchingUser(true);
     try {
       const res = await fetch(`/api/users/profile/${searchText}`);
@@ -132,7 +131,9 @@ const ChatPage = () => {
   };
 
   const debounced = useDebouncedCallback(
-    (value) => {handleConversationSearch(value)},
+    (value) => {
+      handleConversationSearch(value);
+    },
     800,
     // The maximum time func is allowed to be delayed before it's invoked:
     { maxWait: 2000 }
@@ -174,14 +175,18 @@ const ChatPage = () => {
             Your Conversations
           </Text>
           <form onSubmit={handleConversationSearch}>
-            <Flex alignItems={"center"} gap={2}>
+            <Flex position={"relative"} alignItems={"center"} gap={2}>
               <Input
                 placeholder="Search for a user"
+                width={"full"}
                 onChange={(e) => debounced(e.target.value?.trim())}
               />
               <Button
+                position={"absolute"}
+                right={"0"}
+				backgroundColor={"transparent"}
                 size={"sm"}
-                onClick={handleConversationSearch}
+                // onClick={handleConversationSearch}
                 isLoading={searchingUser}
               >
                 <SearchIcon />
