@@ -20,7 +20,7 @@ const getUserProfile = async (req, res) => {
         .select("-updatedAt");
     } else {
       // query is username
-      user = await User.findOne({ username: query })
+      user = await User.findOne({ fullName: { $regex: query, $options: "i" } })
         .select("-password")
         .select("-updatedAt");
     }
