@@ -41,7 +41,7 @@
 }
 
 
-@media (width <= 768px) {
+@media (max-width: 769px) {
 	.suggest {
 		order: -1;
 	}
