@@ -80,7 +80,7 @@ const ChatPage = () => {
     if (!searchText) return;
     setSearchingUser(true);
     try {
-      const res = await fetch(`/api/users/profile/${searchText}`);
+      const res = await fetch(`/api/users/search/${searchText}`);
       const searchedUser = await res.json();
       if (searchedUser.error) {
         showToast("Error", searchedUser.error, "error");
