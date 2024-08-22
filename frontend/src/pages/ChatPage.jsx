@@ -179,11 +179,14 @@ const ChatPage = () => {
               <Input
                 placeholder="Search for a user"
                 width={"full"}
+				pr={"32px"}
                 onChange={(e) => debounced(e.target.value?.trim())}
               />
               <Button
                 position={"absolute"}
                 right={"0"}
+				p={0}
+				w={"fit-content"}
 				backgroundColor={"transparent"}
                 size={"sm"}
                 // onClick={handleConversationSearch}
