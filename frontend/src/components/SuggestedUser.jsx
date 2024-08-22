@@ -6,17 +6,17 @@ const SuggestedUser = ({ user }) => {
 	const { handleFollowUnfollow, following, updating } = useFollowUnfollow(user);
 
 	return (
-		<Flex gap={2} justifyContent={"space-between"} alignItems={"center"}>
+		<Flex  gap={2} justifyContent={"space-between"} boxShadow={{base: "lg", md: "unset"}} p='1'  direction={{base: "column", md: "row"}} alignItems={"center"}>
 			{/* left side */}
-			<Flex gap={2} as={Link} to={`${user.username}`}>
-				<Avatar src={user.profilePic} />
+			<Flex direction={{md: "row", base: "column"}} alignItems={{base: "center"}}  gap={2} as={Link} to={`${user.username}`}>
+				<Avatar width={{base: "2rem"}} height={"auto"} aspectRatio={{base: 1}} src={user.profilePic} /> 
 				<Box>
 					<Text fontSize={"sm"} fontWeight={"bold"}>
-						{user.username}
+						{user.fullName}
 					</Text>
-					<Text color={"gray.light"} fontSize={"sm"}>
+					{/* <Text color={"gray.light"} fontSize={"sm"}>
 						{user.name}
-					</Text>
+					</Text> */}
 				</Box>
 			</Flex>
 			{/* right side */}

@@ -33,7 +33,7 @@ const HomePage = () => {
 	}, [showToast, setPosts]);
 
 	return (
-		<Flex gap='10' alignItems={"flex-start"}>
+		<Flex className="suggest-wrap" gap='10' alignItems={"flex-start"}>
 			<Box flex={70}>
 				{!loading && posts.length === 0 && <h1>Follow some users to see the feed</h1>}
 
@@ -49,8 +49,9 @@ const HomePage = () => {
 			</Box>
 			<Box
 				flex={30}
+				className="suggest"
 				display={{
-					base: "none",
+					// base: "none",
 					md: "block",
 				}}
 			>

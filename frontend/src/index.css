@@ -39,3 +39,21 @@
 	background-color: var(--bg-cl);
 	color: var(--txt-cl);
 }
+
+
+@media (width <= 768px) {
+	.suggest {
+		order: -1;
+	}
+	
+	.suggest-wrap {
+		display: grid !important;
+		row-gap: 1rem !important;
+	}
+/* 
+	.scroll {
+		flex-direction: row !important;
+		gap: 2rem !important;
+		overflow: auto;
+	} */
+}

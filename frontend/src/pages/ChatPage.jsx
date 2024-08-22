@@ -132,7 +132,7 @@ const ChatPage = () => {
 				}}
 				mx={"auto"}
 			>
-				<Flex flex={30} gap={2} flexDirection={"column"} maxW={{ sm: "250px", md: "full" }} mx={"auto"}>
+				<Flex px={4} rounded={4} py={4} shadow={"lg"} flex={30} gap={2} flexDirection={"column"} width={{base: "full"}} maxW={{ sm: "full", md: "full" }} mx={"auto"}>
 					<Text fontWeight={700} color={useColorModeValue("gray.600", "gray.400")}>
 						Your Conversations
 					</Text>
