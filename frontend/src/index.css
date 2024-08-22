@@ -6,12 +6,12 @@
 	transition: background-color 0.3s ease-in-out;
 }
 
-.icon-container:hover {
+/* .icon-container:hover {
 	background-color: #1e1e1e;
 }
 
 ::-webkit-scrollbar {
-	width: 7px;
+	width: 2px;
 }
 
 ::-webkit-scrollbar-track {
@@ -23,7 +23,7 @@
 }
 ::-webkit-scrollbar-thumb {
 	background-color: #555;
-}
+} */
 
 .mode {
 	width: 3rem;

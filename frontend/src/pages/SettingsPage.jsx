@@ -1,10 +1,11 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Box, Button, Text, useColorMode, Flex, Switch, Grid } from "@chakra-ui/react";
 import useShowToast from "../hooks/useShowToast";
 import useLogout from "../hooks/useLogout";
 
 export const SettingsPage = () => {
 	const showToast = useShowToast();
 	const logout = useLogout();
+	const { colorMode, toggleColorMode } = useColorMode();
 
 	const freezeAccount = async () => {
 		if (!window.confirm("Are you sure you want to freeze your account?")) return;
@@ -30,13 +31,23 @@ export const SettingsPage = () => {
 
 	return (
 		<>
-			<Text my={1} fontWeight={"bold"}>
-				Freeze Your Account
-			</Text>
-			<Text my={1}>You can unfreeze your account anytime by logging in.</Text>
-			<Button size={"sm"} colorScheme='red' onClick={freezeAccount}>
-				Freeze
-			</Button>
+			<Grid rowGap={4}>
+				<Grid rowGap={1}   >
+					<Text textTransform={"uppercase"} fontWeight={"bold"}>{colorMode}</Text>
+					<Flex>
+						<Switch onChange={toggleColorMode} />
+					</Flex>
+				</Grid>
+				<Box>
+					<Text my={1} fontWeight={"bold"}>
+						Freeze Your Account
+					</Text>
+					<Text my={1}>You can unfreeze your account anytime by logging in.</Text>
+					<Button size={"sm"} colorScheme='red' onClick={freezeAccount}>
+						Freeze
+					</Button>
+				</Box>
+			</Grid>
 		</>
 	);
 };
