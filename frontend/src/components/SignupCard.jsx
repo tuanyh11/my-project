@@ -30,7 +30,8 @@ export default function SignupCard() {
 		username: "",
 		email: "",
 		password: "",
-		gender: ""
+		gender: "",
+		confirmPassword: "",
 	});
 
 	const showToast = useShowToast();
@@ -61,13 +62,13 @@ export default function SignupCard() {
 
 	return (
 		<Flex align={"center"} justify={"center"}>
-			<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+			<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={0}>
 				<Stack align={"center"}>
 					<Heading fontSize={"4xl"} textAlign={"center"}>
 						Sign up
 					</Heading>
 				</Stack>
-				<Box rounded={"lg"} bg={useColorModeValue("white", "gray.dark")} boxShadow={"lg"} p={8}>
+				<Box rounded={"lg"} bg={useColorModeValue("white", "gray.dark")} boxShadow={"lg"} p={{base: 4, md: 8}}>
 					<Stack spacing={4}>
 						<HStack>
 							<Box>
@@ -92,9 +93,9 @@ export default function SignupCard() {
 							</Box>
 						</HStack>
 						<FormControl isRequired>
-							<FormLabel>Email address</FormLabel>
+							<FormLabel>Phone</FormLabel>
 							<Input
-								type='email'
+								type='text'
 								onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
 								value={inputs.email}
 							/>
@@ -106,6 +107,24 @@ export default function SignupCard() {
 									type={showPassword ? "text" : "password"}
 									onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
 									value={inputs.password}
+								/>
+								<InputRightElement h={"full"}>
+									<Button
+										variant={"ghost"}
+										onClick={() => setShowPassword((showPassword) => !showPassword)}
+									>
+										{showPassword ? <ViewIcon /> : <ViewOffIcon />}
+									</Button>
+								</InputRightElement>
+							</InputGroup>
+						</FormControl>
+						<FormControl isRequired>
+							<FormLabel>Confirm Password</FormLabel>
+							<InputGroup>
+								<Input
+									type={showPassword ? "text" : "password"}
+									onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
+									value={inputs.confirmPassword}
 								/>
 								<InputRightElement h={"full"}>
 									<Button

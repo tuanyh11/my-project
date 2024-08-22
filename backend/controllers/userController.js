@@ -36,12 +36,16 @@ const getUserProfile = async (req, res) => {
 
 const signupUser = async (req, res) => {
   try {
-    const { fullName, email, username, password, gender } = req.body;
+    const { fullName, email, username, password, gender, confirmPassword } =
+      req.body;
     const user = await User.findOne({ $or: [{ email }, { username }] });
 
     if (user) {
       return res.status(400).json({ error: "User already exists" });
     }
+	if(password !== confirmPassword) {
+		 return res.status(403).json({ error: "Password dose not match" });
+	}
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
