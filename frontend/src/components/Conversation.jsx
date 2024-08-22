@@ -21,7 +21,7 @@ const Conversation = ({ conversation, isOnline }) => {
 	const lastMessage = conversation.lastMessage;
 	const [selectedConversation, setSelectedConversation] = useRecoilState(selectedConversationAtom);
 	const colorMode = useColorMode();
-
+	
 	return (
 		<Flex
 			gap={4}
@@ -39,11 +39,12 @@ const Conversation = ({ conversation, isOnline }) => {
 					userProfilePic: user.profilePic,
 					username: user.username,
 					mock: conversation.mock,
+					fullName: user.fullName
 				})
 			}
-			bg={
-				selectedConversation?._id === conversation._id ? (colorMode === "light" ? "gray.400" : "gray.dark") : ""
-			}
+			// bg={
+			// 	// selectedConversation?._id === conversation._id ? (colorMode === "light" ? "gray.400" : "gray.dark") : ""
+			// }
 			borderRadius={"md"}
 		>
 			<WrapItem>
@@ -60,10 +61,10 @@ const Conversation = ({ conversation, isOnline }) => {
 			</WrapItem>
 
 			<Stack direction={"column"} fontSize={"sm"}>
-				<Text color={"white"} fontWeight='700' display={"flex"} alignItems={"center"}>
+				<Text  fontWeight='700' display={"flex"} alignItems={"center"}>
 					{user.fullName} <Image src='/verified.png' w={4} h={4} ml={1} />
 				</Text>
-				<Text color={"white"} fontSize={"xs"} display={"flex"} alignItems={"center"} gap={1}>
+				<Text  fontSize={"xs"} display={"flex"} alignItems={"center"} gap={1}>
 					{currentUser._id === lastMessage.sender ? (
 						<Box color={lastMessage.seen ? "blue.400" : ""}>
 							<BsCheck2All size={16} />
